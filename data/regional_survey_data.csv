@@ -1,0 +1,95 @@
+region,country,disease,last_survey_date,reported_case_rate,data_source
+United States,United States,COVID-19,2023-05-20,39.01,real
+France,France,COVID-19,2023-07-01,17.74,real
+South Africa,South Africa,COVID-19,2024-08-04,0.0,real
+Peru,Peru,COVID-19,2024-08-04,0.0,real
+Uganda,Uganda,COVID-19,2024-08-04,0.0,real
+Pakistan,Pakistan,COVID-19,2024-08-04,0.0,real
+Philippines,Philippines,COVID-19,2024-08-04,0.0,real
+Bangladesh,Bangladesh,COVID-19,2024-08-04,0.03,real
+Mexico,Mexico,COVID-19,2024-08-04,0.38,real
+Kenya,Kenya,COVID-19,2024-08-04,0.0,real
+United Kingdom,United Kingdom,COVID-19,2024-08-04,7.12,real
+Indonesia,Indonesia,COVID-19,2024-08-04,0.02,real
+India,India,COVID-19,2024-08-04,0.03,real
+Ghana,Ghana,COVID-19,2024-08-04,0.0,real
+Ethiopia,Ethiopia,COVID-19,2024-08-04,0.0,real
+Egypt,Egypt,COVID-19,2024-08-04,0.0,real
+Democratic Republic of Congo,Democratic Republic of Congo,COVID-19,2024-08-04,0.0,real
+Brazil,Brazil,COVID-19,2024-08-04,0.0,real
+Nigeria,Nigeria,COVID-19,2024-08-04,0.0,real
+Vietnam,Vietnam,COVID-19,2024-08-04,0.0,real
+Nigeria,Nigeria,Tuberculosis,2024-12-31,510000.0,real
+Pakistan,Pakistan,Tuberculosis,2024-12-31,669000.0,real
+Philippines,Philippines,Tuberculosis,2024-12-31,724000.0,real
+Peru,Peru,Tuberculosis,2024-12-31,48000.0,real
+India,India,Tuberculosis,2024-12-31,2710000.0,real
+Indonesia,Indonesia,Tuberculosis,2024-12-31,1080000.0,real
+Mexico,Mexico,Tuberculosis,2024-12-31,37000.0,real
+Kenya,Kenya,Tuberculosis,2024-12-31,117000.0,real
+Uganda,Uganda,Tuberculosis,2024-12-31,99000.0,real
+Vietnam,Vietnam,Tuberculosis,2024-12-31,184000.0,real
+United Kingdom,United Kingdom,Tuberculosis,2024-12-31,6700.0,real
+South Africa,South Africa,Tuberculosis,2024-12-31,249000.0,real
+Egypt,Egypt,Tuberculosis,2024-12-31,12000.0,real
+Ethiopia,Ethiopia,Tuberculosis,2024-12-31,186000.0,real
+Ghana,Ghana,Tuberculosis,2024-12-31,43000.0,real
+France,France,Tuberculosis,2024-12-31,5200.0,real
+Brazil,Brazil,Tuberculosis,2024-12-31,104000.0,real
+Democratic Republic of Congo,Democratic Republic of Congo,Tuberculosis,2024-12-31,412000.0,real
+United States,United States,Tuberculosis,2024-12-31,11000.0,real
+Bangladesh,Bangladesh,Tuberculosis,2024-12-31,384000.0,real
+India,India,Malaria,2024-12-31,1.48,real
+Mexico,Mexico,Malaria,2024-12-31,0.1,real
+Vietnam,Vietnam,Malaria,2024-12-31,0.0,real
+Indonesia,Indonesia,Malaria,2024-12-31,2.23,real
+Kenya,Kenya,Malaria,2024-12-31,74.17,real
+Bangladesh,Bangladesh,Malaria,2024-12-31,0.86,real
+Nigeria,Nigeria,Malaria,2024-12-31,294.25,real
+Pakistan,Pakistan,Malaria,2024-12-31,12.77,real
+Peru,Peru,Malaria,2024-12-31,3.25,real
+Philippines,Philippines,Malaria,2024-12-31,0.35,real
+Egypt,Egypt,Malaria,2024-12-31,0.0,real
+Ethiopia,Ethiopia,Malaria,2024-12-31,138.5,real
+Ghana,Ghana,Malaria,2024-12-31,195.77,real
+South Africa,South Africa,Malaria,2024-12-31,0.11,real
+Uganda,Uganda,Malaria,2024-12-31,264.23,real
+Democratic Republic of Congo,Democratic Republic of Congo,Malaria,2024-12-31,321.89,real
+Brazil,Brazil,Malaria,2024-12-31,3.75,real
+Democratic Republic of Congo,Democratic Republic of Congo,Influenza,2025-11-24,3.0,real
+Ethiopia,Ethiopia,Influenza,2026-05-18,2.0,real
+Philippines,Philippines,Influenza,2026-05-25,1.0,real
+Peru,Peru,Influenza,2026-06-22,15.0,real
+Ghana,Ghana,Influenza,2026-06-29,40.0,real
+Egypt,Egypt,Influenza,2026-07-06,4.0,real
+Nigeria,Nigeria,Influenza,2026-07-06,2.0,real
+Kenya,Kenya,Influenza,2026-07-06,1.0,real
+Indonesia,Indonesia,Influenza,2026-07-13,9.0,real
+Pakistan,Pakistan,Influenza,2026-07-13,1.0,real
+South Africa,South Africa,Influenza,2026-07-13,9.0,real
+Uganda,Uganda,Influenza,2026-07-13,1.0,real
+France,France,Influenza,2026-07-13,7.0,real
+United States,United States,Influenza,2026-07-13,126.0,real
+Brazil,Brazil,Influenza,2026-07-20,19.0,real
+India,India,Influenza,2026-07-20,92.0,real
+Mexico,Mexico,Influenza,2026-07-20,10.0,real
+Bangladesh,Bangladesh,Influenza,2026-07-20,16.0,real
+United Kingdom,United Kingdom,Influenza,2026-07-20,1.0,real
+Vietnam,Vietnam,Influenza,2026-07-20,1.0,real
+South Africa,South Africa,HIV,2026-07-14,12.5,synthetic
+Kenya,Kenya,HIV,2026-06-19,4.2,synthetic
+Nigeria,Nigeria,HIV,2026-04-30,1.3,synthetic
+Uganda,Uganda,HIV,2026-06-04,5.4,synthetic
+Mozambique,Mozambique,HIV,2026-03-26,11.8,synthetic
+India,India,HIV,2026-01-15,0.2,synthetic
+Brazil,Brazil,HIV,2026-05-20,0.5,synthetic
+United States,United States,HIV,2026-07-19,0.4,synthetic
+"North Kivu, DRC",Democratic Republic of Congo,Ebola,2026-07-26,340.0,synthetic
+"Ituri, DRC",Democratic Republic of Congo,Ebola,2026-07-22,210.0,synthetic
+"Kampala, Uganda",Uganda,Ebola,2026-07-24,45.0,synthetic
+"Kinshasa, DRC",Democratic Republic of Congo,Ebola,2026-06-24,5.0,synthetic
+"Ondo, Nigeria",Nigeria,Lassa fever,2026-07-20,28.0,synthetic
+"Bauchi, Nigeria",Nigeria,Lassa fever,2026-07-13,19.0,synthetic
+"Edo, Nigeria",Nigeria,Lassa fever,2026-07-16,22.0,synthetic
+"Taraba, Nigeria",Nigeria,Lassa fever,2026-06-29,15.0,synthetic
+"Benue, Nigeria",Nigeria,Lassa fever,2026-06-14,9.0,synthetic

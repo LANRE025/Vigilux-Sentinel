@@ -1,0 +1,31 @@
+region,country,funding_level_pct_of_avg,staff_count,vaccine_stock_units
+United States,United States,103.0,167,7603
+France,France,100.1,63,1444
+South Africa,South Africa,123.3,191,3844
+Peru,Peru,92.0,63,1033
+Uganda,Uganda,63.5,67,1706
+Pakistan,Pakistan,61.5,56,2992
+Philippines,Philippines,109.9,75,1100
+Bangladesh,Bangladesh,64.2,73,2347
+Mexico,Mexico,97.2,57,1551
+Kenya,Kenya,77.8,69,2493
+United Kingdom,United Kingdom,104.9,110,2810
+Indonesia,Indonesia,109.1,86,2260
+India,India,91.9,55,1917
+Ghana,Ghana,101.0,73,2336
+Ethiopia,Ethiopia,87.7,57,2303
+Egypt,Egypt,93.8,96,2695
+Democratic Republic of Congo,Democratic Republic of Congo,68.8,65,1234
+Brazil,Brazil,86.1,72,2020
+Nigeria,Nigeria,83.0,117,1647
+Vietnam,Vietnam,79.8,56,2864
+Mozambique,Mozambique,84.5,70,2815
+"North Kivu, DRC",Democratic Republic of Congo,25.9,21,229
+"Ituri, DRC",Democratic Republic of Congo,29.2,17,160
+"Kampala, Uganda",Uganda,92.6,99,2096
+"Kinshasa, DRC",Democratic Republic of Congo,60.1,94,676
+"Ondo, Nigeria",Nigeria,25.6,30,256
+"Bauchi, Nigeria",Nigeria,37.5,29,213
+"Edo, Nigeria",Nigeria,102.7,173,5387
+"Taraba, Nigeria",Nigeria,96.8,72,1936
+"Benue, Nigeria",Nigeria,70.2,120,2035

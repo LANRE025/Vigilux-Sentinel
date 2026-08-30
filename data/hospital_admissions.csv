@@ -1,0 +1,421 @@
+region,date,admission_count
+United States,2026-07-20,108
+United States,2026-07-21,112
+United States,2026-07-22,116
+United States,2026-07-23,122
+United States,2026-07-24,126
+United States,2026-07-25,132
+United States,2026-07-26,140
+United States,2026-07-27,145
+United States,2026-07-28,150
+United States,2026-07-29,156
+United States,2026-07-30,162
+United States,2026-07-31,170
+United States,2026-08-01,175
+United States,2026-08-02,183
+France,2026-07-20,78
+France,2026-07-21,78
+France,2026-07-22,76
+France,2026-07-23,76
+France,2026-07-24,74
+France,2026-07-25,73
+France,2026-07-26,73
+France,2026-07-27,72
+France,2026-07-28,71
+France,2026-07-29,71
+France,2026-07-30,72
+France,2026-07-31,72
+France,2026-08-01,73
+France,2026-08-02,71
+South Africa,2026-07-20,174
+South Africa,2026-07-21,181
+South Africa,2026-07-22,190
+South Africa,2026-07-23,196
+South Africa,2026-07-24,202
+South Africa,2026-07-25,209
+South Africa,2026-07-26,220
+South Africa,2026-07-27,229
+South Africa,2026-07-28,238
+South Africa,2026-07-29,250
+South Africa,2026-07-30,261
+South Africa,2026-07-31,271
+South Africa,2026-08-01,285
+South Africa,2026-08-02,300
+Peru,2026-07-20,80
+Peru,2026-07-21,79
+Peru,2026-07-22,79
+Peru,2026-07-23,78
+Peru,2026-07-24,78
+Peru,2026-07-25,78
+Peru,2026-07-26,76
+Peru,2026-07-27,77
+Peru,2026-07-28,75
+Peru,2026-07-29,74
+Peru,2026-07-30,76
+Peru,2026-07-31,76
+Peru,2026-08-01,78
+Peru,2026-08-02,76
+Uganda,2026-07-20,163
+Uganda,2026-07-21,166
+Uganda,2026-07-22,165
+Uganda,2026-07-23,166
+Uganda,2026-07-24,167
+Uganda,2026-07-25,168
+Uganda,2026-07-26,168
+Uganda,2026-07-27,171
+Uganda,2026-07-28,176
+Uganda,2026-07-29,175
+Uganda,2026-07-30,177
+Uganda,2026-07-31,173
+Uganda,2026-08-01,175
+Uganda,2026-08-02,176
+Pakistan,2026-07-20,198
+Pakistan,2026-07-21,195
+Pakistan,2026-07-22,194
+Pakistan,2026-07-23,196
+Pakistan,2026-07-24,190
+Pakistan,2026-07-25,190
+Pakistan,2026-07-26,186
+Pakistan,2026-07-27,182
+Pakistan,2026-07-28,177
+Pakistan,2026-07-29,180
+Pakistan,2026-07-30,176
+Pakistan,2026-07-31,173
+Pakistan,2026-08-01,172
+Pakistan,2026-08-02,176
+Philippines,2026-07-20,39
+Philippines,2026-07-21,39
+Philippines,2026-07-22,38
+Philippines,2026-07-23,38
+Philippines,2026-07-24,37
+Philippines,2026-07-25,38
+Philippines,2026-07-26,38
+Philippines,2026-07-27,39
+Philippines,2026-07-28,40
+Philippines,2026-07-29,39
+Philippines,2026-07-30,39
+Philippines,2026-07-31,38
+Philippines,2026-08-01,37
+Philippines,2026-08-02,37
+Bangladesh,2026-07-20,23
+Bangladesh,2026-07-21,23
+Bangladesh,2026-07-22,23
+Bangladesh,2026-07-23,22
+Bangladesh,2026-07-24,22
+Bangladesh,2026-07-25,22
+Bangladesh,2026-07-26,22
+Bangladesh,2026-07-27,22
+Bangladesh,2026-07-28,23
+Bangladesh,2026-07-29,23
+Bangladesh,2026-07-30,23
+Bangladesh,2026-07-31,23
+Bangladesh,2026-08-01,23
+Bangladesh,2026-08-02,23
+Mexico,2026-07-20,197
+Mexico,2026-07-21,196
+Mexico,2026-07-22,195
+Mexico,2026-07-23,190
+Mexico,2026-07-24,192
+Mexico,2026-07-25,187
+Mexico,2026-07-26,182
+Mexico,2026-07-27,179
+Mexico,2026-07-28,175
+Mexico,2026-07-29,174
+Mexico,2026-07-30,169
+Mexico,2026-07-31,164
+Mexico,2026-08-01,160
+Mexico,2026-08-02,157
+Kenya,2026-07-20,114
+Kenya,2026-07-21,111
+Kenya,2026-07-22,109
+Kenya,2026-07-23,108
+Kenya,2026-07-24,109
+Kenya,2026-07-25,112
+Kenya,2026-07-26,113
+Kenya,2026-07-27,112
+Kenya,2026-07-28,110
+Kenya,2026-07-29,110
+Kenya,2026-07-30,113
+Kenya,2026-07-31,113
+Kenya,2026-08-01,112
+Kenya,2026-08-02,109
+United Kingdom,2026-07-20,109
+United Kingdom,2026-07-21,108
+United Kingdom,2026-07-22,110
+United Kingdom,2026-07-23,110
+United Kingdom,2026-07-24,108
+United Kingdom,2026-07-25,111
+United Kingdom,2026-07-26,110
+United Kingdom,2026-07-27,111
+United Kingdom,2026-07-28,114
+United Kingdom,2026-07-29,116
+United Kingdom,2026-07-30,114
+United Kingdom,2026-07-31,115
+United Kingdom,2026-08-01,112
+United Kingdom,2026-08-02,115
+Indonesia,2026-07-20,151
+Indonesia,2026-07-21,148
+Indonesia,2026-07-22,150
+Indonesia,2026-07-23,150
+Indonesia,2026-07-24,153
+Indonesia,2026-07-25,151
+Indonesia,2026-07-26,149
+Indonesia,2026-07-27,152
+Indonesia,2026-07-28,156
+Indonesia,2026-07-29,159
+Indonesia,2026-07-30,162
+Indonesia,2026-07-31,165
+Indonesia,2026-08-01,168
+Indonesia,2026-08-02,165
+India,2026-07-20,152
+India,2026-07-21,154
+India,2026-07-22,159
+India,2026-07-23,161
+India,2026-07-24,161
+India,2026-07-25,158
+India,2026-07-26,159
+India,2026-07-27,158
+India,2026-07-28,161
+India,2026-07-29,163
+India,2026-07-30,161
+India,2026-07-31,166
+India,2026-08-01,162
+India,2026-08-02,158
+Ghana,2026-07-20,137
+Ghana,2026-07-21,135
+Ghana,2026-07-22,136
+Ghana,2026-07-23,139
+Ghana,2026-07-24,142
+Ghana,2026-07-25,142
+Ghana,2026-07-26,143
+Ghana,2026-07-27,146
+Ghana,2026-07-28,142
+Ghana,2026-07-29,144
+Ghana,2026-07-30,147
+Ghana,2026-07-31,150
+Ghana,2026-08-01,152
+Ghana,2026-08-02,152
+Ethiopia,2026-07-20,65
+Ethiopia,2026-07-21,65
+Ethiopia,2026-07-22,64
+Ethiopia,2026-07-23,65
+Ethiopia,2026-07-24,66
+Ethiopia,2026-07-25,66
+Ethiopia,2026-07-26,67
+Ethiopia,2026-07-27,65
+Ethiopia,2026-07-28,64
+Ethiopia,2026-07-29,66
+Ethiopia,2026-07-30,64
+Ethiopia,2026-07-31,64
+Ethiopia,2026-08-01,64
+Ethiopia,2026-08-02,65
+Egypt,2026-07-20,179
+Egypt,2026-07-21,185
+Egypt,2026-07-22,186
+Egypt,2026-07-23,185
+Egypt,2026-07-24,185
+Egypt,2026-07-25,181
+Egypt,2026-07-26,176
+Egypt,2026-07-27,181
+Egypt,2026-07-28,182
+Egypt,2026-07-29,183
+Egypt,2026-07-30,187
+Egypt,2026-07-31,187
+Egypt,2026-08-01,191
+Egypt,2026-08-02,195
+Democratic Republic of Congo,2026-07-20,72
+Democratic Republic of Congo,2026-07-21,71
+Democratic Republic of Congo,2026-07-22,71
+Democratic Republic of Congo,2026-07-23,72
+Democratic Republic of Congo,2026-07-24,71
+Democratic Republic of Congo,2026-07-25,71
+Democratic Republic of Congo,2026-07-26,73
+Democratic Republic of Congo,2026-07-27,71
+Democratic Republic of Congo,2026-07-28,72
+Democratic Republic of Congo,2026-07-29,73
+Democratic Republic of Congo,2026-07-30,74
+Democratic Republic of Congo,2026-07-31,76
+Democratic Republic of Congo,2026-08-01,76
+Democratic Republic of Congo,2026-08-02,77
+Brazil,2026-07-20,145
+Brazil,2026-07-21,142
+Brazil,2026-07-22,142
+Brazil,2026-07-23,145
+Brazil,2026-07-24,147
+Brazil,2026-07-25,148
+Brazil,2026-07-26,151
+Brazil,2026-07-27,148
+Brazil,2026-07-28,144
+Brazil,2026-07-29,145
+Brazil,2026-07-30,142
+Brazil,2026-07-31,138
+Brazil,2026-08-01,140
+Brazil,2026-08-02,140
+Nigeria,2026-07-20,145
+Nigeria,2026-07-21,142
+Nigeria,2026-07-22,143
+Nigeria,2026-07-23,140
+Nigeria,2026-07-24,138
+Nigeria,2026-07-25,141
+Nigeria,2026-07-26,141
+Nigeria,2026-07-27,141
+Nigeria,2026-07-28,144
+Nigeria,2026-07-29,147
+Nigeria,2026-07-30,147
+Nigeria,2026-07-31,148
+Nigeria,2026-08-01,148
+Nigeria,2026-08-02,148
+Vietnam,2026-07-20,194
+Vietnam,2026-07-21,194
+Vietnam,2026-07-22,198
+Vietnam,2026-07-23,198
+Vietnam,2026-07-24,195
+Vietnam,2026-07-25,195
+Vietnam,2026-07-26,200
+Vietnam,2026-07-27,205
+Vietnam,2026-07-28,210
+Vietnam,2026-07-29,215
+Vietnam,2026-07-30,211
+Vietnam,2026-07-31,211
+Vietnam,2026-08-01,210
+Vietnam,2026-08-02,208
+Mozambique,2026-07-20,97
+Mozambique,2026-07-21,96
+Mozambique,2026-07-22,93
+Mozambique,2026-07-23,94
+Mozambique,2026-07-24,96
+Mozambique,2026-07-25,98
+Mozambique,2026-07-26,96
+Mozambique,2026-07-27,98
+Mozambique,2026-07-28,98
+Mozambique,2026-07-29,96
+Mozambique,2026-07-30,99
+Mozambique,2026-07-31,101
+Mozambique,2026-08-01,100
+Mozambique,2026-08-02,102
+"North Kivu, DRC",2026-07-20,128
+"North Kivu, DRC",2026-07-21,132
+"North Kivu, DRC",2026-07-22,139
+"North Kivu, DRC",2026-07-23,144
+"North Kivu, DRC",2026-07-24,151
+"North Kivu, DRC",2026-07-25,160
+"North Kivu, DRC",2026-07-26,167
+"North Kivu, DRC",2026-07-27,174
+"North Kivu, DRC",2026-07-28,181
+"North Kivu, DRC",2026-07-29,187
+"North Kivu, DRC",2026-07-30,195
+"North Kivu, DRC",2026-07-31,203
+"North Kivu, DRC",2026-08-01,212
+"North Kivu, DRC",2026-08-02,223
+"Ituri, DRC",2026-07-20,123
+"Ituri, DRC",2026-07-21,129
+"Ituri, DRC",2026-07-22,135
+"Ituri, DRC",2026-07-23,139
+"Ituri, DRC",2026-07-24,147
+"Ituri, DRC",2026-07-25,155
+"Ituri, DRC",2026-07-26,164
+"Ituri, DRC",2026-07-27,170
+"Ituri, DRC",2026-07-28,176
+"Ituri, DRC",2026-07-29,182
+"Ituri, DRC",2026-07-30,191
+"Ituri, DRC",2026-07-31,198
+"Ituri, DRC",2026-08-01,205
+"Ituri, DRC",2026-08-02,214
+"Kampala, Uganda",2026-07-20,197
+"Kampala, Uganda",2026-07-21,194
+"Kampala, Uganda",2026-07-22,190
+"Kampala, Uganda",2026-07-23,195
+"Kampala, Uganda",2026-07-24,195
+"Kampala, Uganda",2026-07-25,198
+"Kampala, Uganda",2026-07-26,193
+"Kampala, Uganda",2026-07-27,188
+"Kampala, Uganda",2026-07-28,190
+"Kampala, Uganda",2026-07-29,189
+"Kampala, Uganda",2026-07-30,184
+"Kampala, Uganda",2026-07-31,189
+"Kampala, Uganda",2026-08-01,191
+"Kampala, Uganda",2026-08-02,194
+"Kinshasa, DRC",2026-07-20,41
+"Kinshasa, DRC",2026-07-21,41
+"Kinshasa, DRC",2026-07-22,40
+"Kinshasa, DRC",2026-07-23,39
+"Kinshasa, DRC",2026-07-24,38
+"Kinshasa, DRC",2026-07-25,39
+"Kinshasa, DRC",2026-07-26,39
+"Kinshasa, DRC",2026-07-27,40
+"Kinshasa, DRC",2026-07-28,40
+"Kinshasa, DRC",2026-07-29,39
+"Kinshasa, DRC",2026-07-30,40
+"Kinshasa, DRC",2026-07-31,41
+"Kinshasa, DRC",2026-08-01,42
+"Kinshasa, DRC",2026-08-02,41
+"Ondo, Nigeria",2026-07-20,68
+"Ondo, Nigeria",2026-07-21,71
+"Ondo, Nigeria",2026-07-22,74
+"Ondo, Nigeria",2026-07-23,78
+"Ondo, Nigeria",2026-07-24,81
+"Ondo, Nigeria",2026-07-25,84
+"Ondo, Nigeria",2026-07-26,87
+"Ondo, Nigeria",2026-07-27,91
+"Ondo, Nigeria",2026-07-28,94
+"Ondo, Nigeria",2026-07-29,97
+"Ondo, Nigeria",2026-07-30,100
+"Ondo, Nigeria",2026-07-31,105
+"Ondo, Nigeria",2026-08-01,110
+"Ondo, Nigeria",2026-08-02,114
+"Bauchi, Nigeria",2026-07-20,146
+"Bauchi, Nigeria",2026-07-21,153
+"Bauchi, Nigeria",2026-07-22,160
+"Bauchi, Nigeria",2026-07-23,168
+"Bauchi, Nigeria",2026-07-24,176
+"Bauchi, Nigeria",2026-07-25,185
+"Bauchi, Nigeria",2026-07-26,195
+"Bauchi, Nigeria",2026-07-27,207
+"Bauchi, Nigeria",2026-07-28,215
+"Bauchi, Nigeria",2026-07-29,223
+"Bauchi, Nigeria",2026-07-30,231
+"Bauchi, Nigeria",2026-07-31,239
+"Bauchi, Nigeria",2026-08-01,253
+"Bauchi, Nigeria",2026-08-02,266
+"Edo, Nigeria",2026-07-20,57
+"Edo, Nigeria",2026-07-21,60
+"Edo, Nigeria",2026-07-22,62
+"Edo, Nigeria",2026-07-23,64
+"Edo, Nigeria",2026-07-24,66
+"Edo, Nigeria",2026-07-25,69
+"Edo, Nigeria",2026-07-26,72
+"Edo, Nigeria",2026-07-27,74
+"Edo, Nigeria",2026-07-28,77
+"Edo, Nigeria",2026-07-29,81
+"Edo, Nigeria",2026-07-30,85
+"Edo, Nigeria",2026-07-31,90
+"Edo, Nigeria",2026-08-01,93
+"Edo, Nigeria",2026-08-02,97
+"Taraba, Nigeria",2026-07-20,92
+"Taraba, Nigeria",2026-07-21,91
+"Taraba, Nigeria",2026-07-22,89
+"Taraba, Nigeria",2026-07-23,87
+"Taraba, Nigeria",2026-07-24,86
+"Taraba, Nigeria",2026-07-25,85
+"Taraba, Nigeria",2026-07-26,88
+"Taraba, Nigeria",2026-07-27,87
+"Taraba, Nigeria",2026-07-28,84
+"Taraba, Nigeria",2026-07-29,86
+"Taraba, Nigeria",2026-07-30,85
+"Taraba, Nigeria",2026-07-31,83
+"Taraba, Nigeria",2026-08-01,82
+"Taraba, Nigeria",2026-08-02,80
+"Benue, Nigeria",2026-07-20,91
+"Benue, Nigeria",2026-07-21,89
+"Benue, Nigeria",2026-07-22,89
+"Benue, Nigeria",2026-07-23,87
+"Benue, Nigeria",2026-07-24,86
+"Benue, Nigeria",2026-07-25,83
+"Benue, Nigeria",2026-07-26,83
+"Benue, Nigeria",2026-07-27,81
+"Benue, Nigeria",2026-07-28,78
+"Benue, Nigeria",2026-07-29,77
+"Benue, Nigeria",2026-07-30,76
+"Benue, Nigeria",2026-07-31,77
+"Benue, Nigeria",2026-08-01,77
+"Benue, Nigeria",2026-08-02,78

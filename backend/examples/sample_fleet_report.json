@@ -1,0 +1,92 @@
+{
+  "run_id": "3f9c1e2a7b4d5e6f7a8b9c0d",
+  "started_at": "2026-08-29T10:15:32.481237+00:00",
+  "completed_at": "2026-08-29T10:15:41.902114+00:00",
+  "regions_evaluated": 5,
+  "regions_flagged": 3,
+  "assessments": [
+    {
+      "region_id": "region-lusaka-01",
+      "country": "Zambia",
+      "risk_level": "Urgent",
+      "explanation": "Admissions up 21% over the prior period, funding at 41% of the regional average and staffing below 30.",
+      "confidence": "High",
+      "signals_used": ["admissions_pct_change", "funding_usd", "staffing_count"],
+      "days_since_survey": 47,
+      "assessed_at": "2026-08-29T10:15:34.1+00:00",
+      "trend": {
+        "region_id": "region-lusaka-01",
+        "previous_risk_level": "Watch",
+        "current_risk_level": "Urgent",
+        "trend_direction": "worsening",
+        "runs_compared": 6,
+        "note": "region-lusaka-01 moved from Watch to Urgent across 6 fleet run(s)."
+      }
+    },
+    {
+      "region_id": "region-accra-01",
+      "country": "Ghana",
+      "risk_level": "Urgent",
+      "explanation": "Rising admissions trend with funding at roughly half of the regional average.",
+      "confidence": "Medium",
+      "signals_used": ["admissions_pct_change", "funding_usd"],
+      "days_since_survey": 31,
+      "assessed_at": "2026-08-29T10:15:34.9+00:00",
+      "trend": null
+    },
+    {
+      "region_id": "region-kampala-01",
+      "country": "Uganda",
+      "risk_level": "Watch",
+      "explanation": "Admissions +8%; staffing close to the fleet floor of 60.",
+      "confidence": "Medium",
+      "signals_used": ["admissions_pct_change", "staffing_count", "days_since_survey"],
+      "days_since_survey": 35,
+      "assessed_at": "2026-08-29T10:15:35.4+00:00",
+      "trend": {
+        "region_id": "region-kampala-01",
+        "previous_risk_level": "Stable",
+        "current_risk_level": "Watch",
+        "trend_direction": "worsening",
+        "runs_compared": 4,
+        "note": "region-kampala-01 moved from Stable to Watch across 4 fleet run(s)."
+      }
+    },
+    {
+      "region_id": "region-nairobi-01",
+      "country": "Kenya",
+      "risk_level": "Watch",
+      "explanation": "Admissions +6% over the prior period with funding slightly below average.",
+      "confidence": "Medium",
+      "signals_used": ["admissions_pct_change", "funding_usd"],
+      "days_since_survey": 15,
+      "assessed_at": "2026-08-29T10:15:36.0+00:00",
+      "trend": {
+        "region_id": "region-nairobi-01",
+        "previous_risk_level": "Urgent",
+        "current_risk_level": "Watch",
+        "trend_direction": "improving",
+        "runs_compared": 7,
+        "note": "region-nairobi-01 moved from Urgent to Watch across 7 fleet run(s)."
+      }
+    },
+    {
+      "region_id": "region-bangalore-01",
+      "country": "India",
+      "risk_level": "Stable",
+      "explanation": "No concerning signals: flat admissions, funding and staffing adequate.",
+      "confidence": "High",
+      "signals_used": [],
+      "days_since_survey": 6,
+      "assessed_at": "2026-08-29T10:15:36.6+00:00",
+      "trend": {
+        "region_id": "region-bangalore-01",
+        "previous_risk_level": null,
+        "current_risk_level": "Stable",
+        "trend_direction": "first_observation",
+        "runs_compared": 1,
+        "note": "First fleet assessment recorded for region-bangalore-01; baseline is Stable."
+      }
+    }
+  ]
+}

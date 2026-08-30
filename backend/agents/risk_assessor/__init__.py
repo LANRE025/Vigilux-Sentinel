@@ -1,0 +1,1 @@
+"""Risk assessor agent: Gemini-backed SignalAssessment per stale region."""
