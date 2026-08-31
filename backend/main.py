@@ -22,6 +22,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from google.adk import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
@@ -90,6 +91,17 @@ app = FastAPI(
     ),
     version="1.0.0",
     lifespan=lifespan,
+)
+
+# Allow the frontend (a separate origin) to call the fleet from the browser.
+# The frontend URL is not known at deploy time, so allow any origin for now;
+# tighten to the frontend's exact origin before production.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

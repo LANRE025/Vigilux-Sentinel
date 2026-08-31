@@ -1,0 +1,66 @@
+/* ============================================================
+   Vigilux Sentinel — Signal Console · design tokens
+   A dark early-warning command instrument. Risk is a SYSTEM of
+   signal lamps, not a single accent color. Telemetry in mono.
+   ============================================================ */
+
+:root {
+  /* -- surface -------------------------------------------------- */
+  --bg: #0a0e1a; /* ink blue-black base (ops room) */
+  --bg-raised: #0d1322; /* subtle lift above the base */
+  --panel: #111726; /* card / board panel */
+  --panel-2: #161f33; /* nested / hovered panel */
+  --grid: #1f2a3f; /* hairlines, dividers, gridlines */
+  --grid-strong: #2a3854; /* emphasized rules */
+
+  /* -- ink (text) ------------------------------------------------ */
+  --ink: #e7e9ef; /* primary data text (warm off-white) */
+  --ink-soft: #b9c0d1; /* secondary */
+  --muted: #7a849b; /* labels, captions, idle state */
+  --faint: #4a5470; /* decorative / placeholders */
+
+  /* -- risk lamps -------------------------------------------------- */
+  --stable: #35d07f; /* signal green  */
+  --watch: #f5a623; /* amber          */
+  --urgent: #ff4d4d; /* signal red     */
+
+  /* -- sweep / interactive accent (used sparingly) ---------------- */
+  --phosphor: #4fd8ff; /* radar phosphor for the live sweep + focus */
+  --phosphor-dim: rgba(79, 216, 255, 0.14);
+
+  /* lamp glow shadows */
+  --glow-stable: 0 0 6px rgba(53, 208, 127, 0.55), 0 0 18px rgba(53, 208, 127, 0.25);
+  --glow-watch: 0 0 6px rgba(245, 166, 35, 0.55), 0 0 18px rgba(245, 166, 35, 0.25);
+  --glow-urgent: 0 0 6px rgba(255, 77, 77, 0.6), 0 0 20px rgba(255, 77, 77, 0.32);
+  --glow-phosphor: 0 0 6px rgba(79, 216, 255, 0.6), 0 0 20px rgba(79, 216, 255, 0.3);
+
+  /* -- type --------------------------------------------------------- */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* -- spacing / geometry ------------------------------------------ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius: 3px; /* crisp instrument corners, not pill-shaped */
+
+  /* -- motion --------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms;
+  --dur-med: 260ms;
+  --dur-sweep: 320ms;
+
+  --topbar-h: 52px;
+  --statusrail-h: 56px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-sweep: 0ms;
+  }
+}

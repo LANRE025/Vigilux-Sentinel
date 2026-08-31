@@ -1,0 +1,27 @@
+- generic [ref=f6e3]:
+  - banner [ref=f6e4]:
+    - generic [ref=f6e5]:
+      - generic [ref=f6e6]: VIGILUX
+      - generic [ref=f6e7]: signal console
+    - generic [ref=f6e8]: demo mode
+  - generic [ref=f6e11]:
+    - generic [ref=f6e12]:
+      - generic [ref=f6e13]:
+        - generic [ref=f6e14]:
+          - generic [ref=f6e15]: evaluated
+          - generic [ref=f6e16]: "0"
+        - generic [ref=f6e17]:
+          - generic [ref=f6e18]: flagged
+          - generic [ref=f6e19]: "0"
+        - generic [ref=f6e20]:
+          - generic [ref=f6e21]: mode
+          - generic [ref=f6e22]: demo
+      - button "RUN FLEET ▸" [ref=f6e23] [cursor=pointer]
+    - region "regional signal board" [ref=f6e25]:
+      - generic [ref=f6e26]:
+        - generic [ref=f6e27]: No regions on the board
+        - generic [ref=f6e28]: Connect the backend or run in demo mode (VITE_DEMO=true).
+  - region "run telemetry" [ref=f6e29]:
+    - generic [ref=f6e30]:
+      - generic [ref=f6e31]: last run
+      - generic [ref=f6e32]: none yet

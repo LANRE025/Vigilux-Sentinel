@@ -20,3 +20,5 @@ Thumbs.db
 
 # Cloud Run deploy echo output
 deploy/*.log
+
+node_modules/
