@@ -178,7 +178,8 @@ def _snapshot(region: dict) -> dict:
     }
     if region.get("disease"):
         # Imported rows carry the surveyed disease; the hand-authored REGIONS
-        # deliberately do not. RegionSnapshot (pydantic) ignores unknown keys.
+        # deliberately do not. The data steward reads disease generically
+        # (None when absent).
         snapshot["disease"] = region["disease"]
     return snapshot
 

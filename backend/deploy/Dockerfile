@@ -11,9 +11,10 @@ WORKDIR /app
 COPY backend/agents/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Application code (agents package). Data seed script is optional at runtime.
+# Application code (agents package + top-level app module). Data seed script is optional at runtime.
 COPY backend/agents/ ./agents/
+COPY backend/main.py ./main.py
 COPY backend/data/ ./data/
 
 EXPOSE 8080
-CMD ["uvicorn", "agents.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

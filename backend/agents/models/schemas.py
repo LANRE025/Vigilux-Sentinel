@@ -30,19 +30,21 @@ class TrendDirection(str, enum.Enum):
     FIRST_OBSERVATION = "first_observation"
 
 
-class RegionSnapshot(BaseModel):
-    """One region's most recent field snapshot, read by the data steward."""
+class RegionSignal(BaseModel):
+    """Canonical per-(region, disease) signal emitted by the data steward.
 
-    region_id: str
+    This is the fleet's input contract for downstream agents (e.g. the risk
+    assessor), independent of whatever the raw region_snapshots storage field
+    names happen to be. The data steward is the ONLY producer of this shape.
+    """
+
+    region: str
     country: str
-    last_survey_at: str = Field(description="ISO 8601 timestamp of the field survey")
-    days_since_survey: int = Field(ge=0)
-    admissions_last_14d: list[int] = Field(description="Daily confirmed admissions, last 14 days")
-    admissions_pct_change: float = Field(description="Percent change in admissions vs prior period")
-    funding_usd: float
-    staffing_count: int = Field(ge=0)
-    supply_stock_units: int = Field(ge=0)
-    regional_avg_funding_usd: float
+    disease: Optional[str] = None  # absent on region-level (non-disease) docs
+    days_stale: int = Field(ge=0, description="Whole days stale at run time")
+    admissions_pct_change: float
+    funding_pct_of_avg: float = Field(ge=0, description="funding_usd as % of regional average")
+    evaluated_at: str = Field(description="ISO 8601 UTC timestamp of the signal")
 
 
 class SignalAssessment(BaseModel):
@@ -65,7 +67,7 @@ class TrendNote(BaseModel):
     previous_risk_level: Optional[RiskLevel] = None
     current_risk_level: RiskLevel
     trend_direction: TrendDirection
-    runs_compared: int = Field(ge=1)
+    runs_compared: int = Field(ge=0, description="prior entries examined; 0 on first observation")
     note: str
 
 
@@ -84,6 +86,10 @@ class FleetReport(BaseModel):
     regions_evaluated: int
     regions_flagged: int
     assessments: list[ReportAssessment] = Field(default_factory=list)
+    missing_region_ids: list[str] = Field(
+        default_factory=list,
+        description="Requested region_ids not found in the data source (empty when no filter was applied)",
+    )
 
 
 class PerAgentTiming(BaseModel):

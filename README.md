@@ -32,11 +32,11 @@ Model Armor).
 
 ```
 backend/                   # everything that runs the agent fleet
+  main.py                   FastAPI: /health, /fleet/regions, /fleet/run, /fleet/status
   agents/
-    main.py                 FastAPI: /health, /fleet/run, /fleet/status
     orchestrator.py         SequentialAgent root owning the four fleet agents
     config.py               pydantic-settings (env / .env)
-    models/schemas.py       RegionSnapshot, SignalAssessment, TrendNote, FleetReport ...
+    models/schemas.py       RegionSignal, SignalAssessment, TrendNote, FleetReport ...
     tools/
       firestore_tool.py     region_snapshots / fleet_runs / run_observability / run_log
       memory_bank_tool.py   Vertex AI Agent Engine Memory Bank + Firestore fallback
@@ -88,15 +88,23 @@ Run this from the `backend/` directory the module names resolve:
 
 ```bash
 cd backend
-..\venv\Scripts\python.exe -m uvicorn agents.main:app --port 8080
+..\venv\Scripts\python.exe -m uvicorn main:app --port 8080
 ```
 
 Trigger a run (requires Firestore connectivity or a mocked/dev path):
 
 ```bash
 curl -X POST http://localhost:8080/fleet/run
+# Optional: process only specific regions (region_ids omitted -> full fleet).
+# Requested ids not found in the data source appear in missing_region_ids.
+curl -X POST http://localhost:8080/fleet/run \
+  -H "Content-Type: application/json" \
+  -d '{"region_ids": ["region-nigeria-covid19-01", "region-accra-01"]}'
 curl http://localhost:8080/fleet/status
 curl http://localhost:8080/health
+
+# Fast, cheap list of available regions for a frontend picker (no pipeline):
+curl http://localhost:8080/fleet/regions   # -> [{"region_id": "...", "display_name": "..."}, ...]
 ```
 
 ### Seed demo data

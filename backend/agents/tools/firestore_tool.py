@@ -9,12 +9,12 @@ Collection layout and document ID scheme
 * ``fleet_runs``        - one completed FleetReport per run, keyed by the
   run_id (a UUID the curator generates).
 * ``run_observability`` - per-agent telemetry for a run, keyed by run_id.
+* ``assessment_history`` - historian's cross-run memory: one document per
+  region keyed by ``region_id``, with an ``entries`` array (full
+  SignalAssessments, most recent last, trimmed to the last 5).
 * ``run_log``           - one entry per completed run, with AUTO-generated
   document IDs: each line is a fresh, unrelated record with no natural key to
   dedupe on (the one place auto IDs are correct).
-* ``assessment_history`` - optional Memory Bank fallback (not built yet). If
-  used, key it by ``region_id`` with per-region history as an array field or
-  subcollection - this layout deliberately does not preclude that.
 
 The public access layer (``read_collection`` / ``read_document`` /
 ``write_document`` / ``append_log``) is generic: the collection name is always
@@ -120,6 +120,41 @@ def read_region_snapshots() -> list[dict[str, Any]]:
     return docs
 
 
+def build_region_display_name(snapshot: dict[str, Any]) -> str:
+    """Human-readable label for a region snapshot.
+
+    There is no dedicated "display name"/"location label" field in the raw
+    snapshot - the readable label is composed from ``country`` plus the
+    optional ``disease`` (which disambiguates the multiple docs that can share
+    one country), exactly as ``data/seed_regions.py`` labels rows on seed.
+    """
+    label = snapshot.get("country") or snapshot.get("region_id") or "Unknown"
+    if snapshot.get("disease"):
+        label += f" / {snapshot['disease']}"
+    return label
+
+
+def list_regions() -> list[dict[str, Any]]:
+    """Return one picker row per region: ``region_id`` + ``display_name``.
+
+    A fast, read-only view of what regions exist in the data source - no
+    staleness calculation, no LLM, no fleet pipeline. Reads the same
+    ``region_snapshots`` collection the data steward uses (region identity
+    lives in the document id == ``region_id`` and in ``country``/``disease``).
+    Sorted by display name for a stable picker.
+    """
+    rows = [
+        {
+            "region_id": snap["region_id"],
+            "display_name": build_region_display_name(snap),
+        }
+        for snap in read_collection("region_snapshots")
+        if snap.get("region_id")
+    ]
+    rows.sort(key=lambda r: (r["display_name"], r["region_id"]))
+    return rows
+
+
 def write_fleet_report(report: dict[str, Any]) -> str:
     """Persist a FleetReport under fleet_runs/<run_id>. Returns the run id."""
     run_id = report["run_id"]
@@ -157,7 +192,49 @@ def append_run_log(entry: dict[str, Any]) -> str:
     return ref.id
 
 
+def append_run_log_entry(
+    run_id: str,
+    started_at: str,
+    completed_at: str,
+    agents_ran: list[str],
+    status: str,
+    error: Optional[str] = None,
+) -> None:
+    """Append one run_log entry describing a completed (or failed) fleet run.
+
+    ``status`` is "success" for a normal run and "error" for a run whose
+    aggregation raised; it is persisted as the RunLogEntry pass/fail
+    ``outcome`` (with any ``error`` detail attached) so existing registry-log
+    consumers keep working.
+    """
+    append_log(
+        "run_log",
+        {
+            "run_id": run_id,
+            "run_timestamp": completed_at,
+            "started_at": started_at,
+            "agents": agents_ran,
+            "outcome": "pass" if status == "success" else "fail",
+            "error": error,
+        },
+    )
+
+
 def get_latest_run_log_entry() -> Optional[dict[str, Any]]:
     """Return the most recent registry log entry, or None."""
     entries = [d for d in read_collection("run_log") if d.get("run_timestamp")]
     return max(entries, key=lambda d: d["run_timestamp"]) if entries else None
+
+
+def read_assessment_history(region_id: str) -> Optional[dict[str, Any]]:
+    """Read a region's assessment-history document, or None if never assessed.
+
+    The document is ``assessment_history/<region_id>`` with shape
+    ``{"region_id": str, "entries": [SignalAssessment + recorded_at, ...]}``.
+    """
+    return read_document("assessment_history", region_id)
+
+
+def write_assessment_history(region_id: str, data: dict[str, Any]) -> None:
+    """Upsert a region's assessment-history document."""
+    write_document("assessment_history", region_id, data)

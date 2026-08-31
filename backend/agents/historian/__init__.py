@@ -1,1 +1,1 @@
-"""Historian agent: Memory Bank backed trend computation."""
+"""Historian agent: Firestore-backed cross-run trend computation."""

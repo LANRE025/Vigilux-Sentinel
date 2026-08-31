@@ -16,6 +16,11 @@ responsibility, its own bounded tools and instructions, and strict sequential
 hand-off of state:
 
 ```
+GET /fleet/regions (FastAPI - read-only, no fleet run)
+   │
+   ▼
+region_snapshots (Firestore) → [{region_id, display_name}]
+
 POST /fleet/run  (FastAPI)
    │
    ▼
@@ -49,24 +54,36 @@ Data flows between agents through ADK session state under the ephemeral
 |---|---|---|---|
 | data-steward | Read all region snapshots, hand structured data to the fleet | No | `firestore_tool.read_region_snapshots` |
 | risk-assessor | A structured `SignalAssessment` per stale region (1 call each), skip fresh ones | Yes, one structured call per stale region | `assess_region` |
-| historian | Cross-run baselines: recall -> TrendNote -> store | No | `memory_bank_tool.*`, `build_trend_note` |
-| curator | Assemble + persist the FleetReport and return it | No | `build_fleet_report`, `firestore_tool.write_*`, `append_run_log` |
+| historian | Cross-run baselines: read history -> TrendNote -> append back | No | `compute_trend`, `firestore_tool.read_assessment_history`, `firestore_tool.write_assessment_history` |
+| curator | Assemble + persist the FleetReport and return it | No | `build_fleet_report`, `firestore_tool.write_*`, `append_run_log_entry` |
 
-## Memory Bank (real role)
+## Region picker (GET /fleet/regions)
 
-The historian is the only agent that reads and writes the Memory Bank. Each
-assessment is scoped per region; the previous assessment for that region is
-recalled *before* this run's assessment so trends can be computed, then the new
-one is stored for the next run.
+`GET /fleet/regions` is a fast, cheap, read-only listing of available regions
+for the frontend region picker. It reads the same ``region_snapshots``
+collection the data steward pulls from (so region identity is always in sync
+with the pipeline), and composes a human-readable ``display_name`` from the
+snapshot's ``country`` plus optional ``disease`` (e.g. "Nigeria / COVID-19"),
+mirroring how ``data/seed_regions.py`` labels rows. It performs **no**
+staleness calculation, **no** Gemini call, and critically does **not** start a
+fleet run - it cannot trigger the assessment pipeline.
 
-- **Real implementation**: a Vertex AI Agent Engine (Memory Bank) provisioned
-  with `google-cloud-aiplatform`, scoping memories by
-  `{"app_name": vigilux-sentinel, "user_id": region:<region_id>}`. Enabled by
-  setting `MEMORY_BANK_AGENT_ENGINE_ID`.
-- **Default fallback**: a compact Firestore rolling window
-  (`assessment_history`, last 10 assessments per region). Same recall/store
-  contract, no Agent Engine to provision. Chosen so the fleet runs out of the
-  box; the real API path works without code changes.
+## Historian runtime memory (assessment_history)
+
+The historian is the only agent that reads and writes cross-run memory. Each
+assessment is scoped per region; the region's history document is read *before*
+this run's assessment is written (read-before-write for the same region), the
+last entry becomes the trend baseline, and the new assessment is appended for
+the next run.
+
+- **Real implementation**: the Firestore collection `assessment_history`, one
+  document per region (`assessment_history/<region_id>`), with an `entries`
+  array holding full SignalAssessments (most recent last). Entries are trimmed
+  to the last 5, so trends compare against at most 5 prior observations.
+  `runs_compared` counts how many prior entries existed (0 = first
+  observation). The same document is never compared against itself within a
+  run: two assessments for one region in a single fleet run both trend against
+  the same pre-run baseline.
 
 ## Observability (real role)
 
@@ -85,7 +102,7 @@ These were out of scope and are called out explicitly:
 
 - **Identity and Gateway (Agent Engine)**: no `/session/*`, model-gateway or
   identity endpoints. The fleet is driven through the FastAPI surface in
-  `backend/agents/main.py`.
+  `backend/main.py`.
 - **Dynamic registry API**: the registry is the static YAML catalog in
   `backend/agents/registry/agent_registry.yaml` plus the `run_log` collection
   written by the curator, not a live registry service.
@@ -100,7 +117,7 @@ flowchart LR
   ORCH --> DS[data-steward]
   DS -->|temp:region_snapshots| RA[risk-assessor]
   RA -->|temp:assessments| HI[historian]
-  HI --> MB[(Memory Bank<br/>recall/store)]
+  HI --> AH[(assessment_history<br/>read-before-write)]
   HI -->|temp:trend_notes| CU[curator]
   CU --> F[(Firestore<br/>fleet_runs/run_observability/run_log)]
   CU -->|FleetReport JSON| API

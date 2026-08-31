@@ -47,6 +47,11 @@ class Settings(BaseSettings):
     # Regions whose survey is older than this many days are pushed to the
     # risk-assessor for a SignalAssessment.
     SURVEY_STALENESS_THRESHOLD_DAYS: int = 30
+    # The data-steward's own "worth evaluating" threshold, in days. Kept
+    # separate from SURVEY_STALENESS_THRESHOLD_DAYS (which is the
+    # risk-assessor's); the two may differ. Boundary is INCLUSIVE: a region
+    # exactly this many days stale is evaluated.
+    DATA_STEWARD_STALENESS_THRESHOLD_DAYS: int = 30
     # When Gemini is unavailable or returns something unusable, fall back to a
     # deterministic heuristic so a fleet run can still complete.
     USE_HEURISTIC_FALLBACK: bool = True

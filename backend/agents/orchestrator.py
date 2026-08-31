@@ -25,8 +25,8 @@ def build_orchestrator() -> SequentialAgent:
             "Root fleet agent for Vigilux Sentinel. Runs the full regional "
             "monitoring pass in strict sequence: data-steward reads all region "
             "snapshots, risk-assessor produces SignalAssessments for stale "
-            "regions, historian computes trends with the Memory Bank, and "
-            "curator assembles + persists the FleetReport."
+            "regions, historian computes trends from each region's Firestore "
+            "assessment history, and curator assembles + persists the FleetReport."
         ),
         sub_agents=[
             DataStewardAgent(),

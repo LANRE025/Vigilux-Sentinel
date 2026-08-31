@@ -1,72 +1,83 @@
-"""historian: computes per-region trends against the Memory Bank.
+"""historian: computes per-region trends against Firestore assessment history.
 
-For each assessment produced by the risk-assessor, the historian recalls the
-most recent prior assessment for that region from the Memory Bank, produces a
+For each assessment produced by the risk-assessor, the historian reads that
+region's history from the ``assessment_history`` collection, produces a
 ``TrendNote`` (improving / worsening / unchanged / first_observation), then
-stores this run's assessment so the next run can compare against it.
+appends this run's assessment so the next run can compare against it. Entries
+are trimmed to the most recent ``HISTORY_MAX_ENTRIES`` per region.
+
+The comparison baseline for a region is read once, on that region's first
+encounter in the run; nothing written earlier in the same run is ever treated
+as "previous", so two assessments for the same region_id in one run both
+compare against the same pre-run document.
 """
 
 from __future__ import annotations
 
 import json
-from typing import Any, Optional
+from datetime import datetime, timezone
+from typing import Any
 
 from google.adk.agents import BaseAgent
 from google.adk.events import Event
 from google.genai import types
 
 from ..models.schemas import RiskLevel, TrendDirection, TrendNote
-from ..tools import memory_bank_tool, observability
+from ..tools import firestore_tool, observability
 
 AGENT_NAME = "historian"
 
-_LEVEL_PRIORITY = {
-    RiskLevel.STABLE: 0,
-    RiskLevel.WATCH: 1,
-    RiskLevel.URGENT: 2,
+HISTORY_MAX_ENTRIES = 5
+
+_LEVEL_RANK = {
+    RiskLevel.STABLE.value: 0,
+    RiskLevel.WATCH.value: 1,
+    RiskLevel.URGENT.value: 2,
 }
 
 
-def build_trend_note(
-    previous: Optional[dict[str, Any]],
-    current: dict[str, Any],
-    runs_compared: int,
-) -> dict[str, Any]:
-    """Compare two assessments (dicts) and templated a TrendNote.
+def _rank(risk_level: str) -> int:
+    """Severity rank of a risk-level string (Stable < Watch < Urgent)."""
+    return _LEVEL_RANK[RiskLevel(risk_level).value]
 
-    ``previous`` is the prior assessment dict from the Memory Bank (or None for
-    first observations). ``current`` is this run's assessment dict.
+
+def compute_trend(
+    current: dict[str, Any],
+    previous_entries: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Build a TrendNote for ``current`` against the last prior entry.
+
+    ``previous_entries`` is the region's history BEFORE this run's assessment,
+    ordered oldest to newest; only the last entry is compared against.
+    ``runs_compared`` counts how many prior entries existed (capped at
+    ``HISTORY_MAX_ENTRIES``), so 0 means a first observation.
     """
     region_id = current["region_id"]
     current_level = current["risk_level"]
+    previous = previous_entries[-1] if previous_entries else None
     previous_level = previous["risk_level"] if previous else None
+    runs_compared = min(len(previous_entries), HISTORY_MAX_ENTRIES)
 
     if previous_level is None:
         direction = TrendDirection.FIRST_OBSERVATION
-        note = (
-            f"First fleet assessment recorded for {region_id}; "
-            f"baseline is {current_level}."
-        )
+        note = f"First assessment on record for {region_id}."
     else:
-        delta = _LEVEL_PRIORITY[current_level] - _LEVEL_PRIORITY[previous_level]
+        delta = _rank(current_level) - _rank(previous_level)
         if delta > 0:
             direction = TrendDirection.WORSENING
             note = (
-                f"{region_id} moved from {previous_level} to {current_level} "
-                f"across {runs_compared} fleet run(s)."
+                f"Risk has escalated from {previous_level} to {current_level} "
+                f"since the last assessment."
             )
         elif delta < 0:
             direction = TrendDirection.IMPROVING
             note = (
-                f"{region_id} moved from {previous_level} to {current_level} "
-                f"across {runs_compared} fleet run(s)."
+                f"Risk has eased from {previous_level} to {current_level} "
+                f"since the last assessment."
             )
         else:
             direction = TrendDirection.UNCHANGED
-            note = (
-                f"{region_id} remains {current_level} across "
-                f"{runs_compared} fleet run(s)."
-            )
+            note = f"Risk remains {current_level} since the last assessment."
 
     return TrendNote(
         region_id=region_id,
@@ -78,34 +89,76 @@ def build_trend_note(
     ).model_dump(mode="json")
 
 
+def _recorded_entry(assessment: dict[str, Any]) -> dict[str, Any]:
+    """Stamp a SignalAssessment with its recorded_at timestamp."""
+    return {**assessment, "recorded_at": datetime.now(timezone.utc).isoformat()}
+
+
+def _history_entries(doc: dict[str, Any] | None) -> list[dict[str, Any]]:
+    """Extract the entries array from an assessment-history document."""
+    if not doc:
+        return []
+    entries = doc.get("entries")
+    if not isinstance(entries, list):
+        return []
+    return [e for e in entries if isinstance(e, dict)]
+
+
+def _append_to_history(
+    entries: list[dict[str, Any]],
+    new_entry: dict[str, Any],
+    cap: int = HISTORY_MAX_ENTRIES,
+) -> list[dict[str, Any]]:
+    """Append ``new_entry`` keeping only the last ``cap`` entries (oldest dropped)."""
+    return (list(entries) + [new_entry])[-cap:]
+
+
 class HistorianAgent(BaseAgent):
-    """Fleet agent that maintains cross-run region baselines via the Memory Bank."""
+    """Fleet agent that maintains cross-run region baselines in assessment_history."""
 
     name: str = AGENT_NAME
     tools: list[Any] = [
-        memory_bank_tool.get_memory_bank,
-        build_trend_note,
+        compute_trend,
+        firestore_tool.read_assessment_history,
+        firestore_tool.write_assessment_history,
     ]
     instructions: str = (
-        "For each assessment, recall the region's previous assessment from the "
-        "Memory Bank, produce a TrendNote (first_observation/improving/worsening/"
-        "unchanged), then store the new assessment back into the Memory Bank so "
-        "the next fleet run can compare against it."
+        "For each assessment, read the region's history from assessment_history, "
+        "produce a TrendNote (first_observation/improving/worsening/unchanged), "
+        "then append this run's assessment (trimmed to the last 5 entries) back "
+        "to the same document so the next fleet run can compare against it."
     )
 
     async def _run_async_impl(self, ctx):
         run_id = ctx.session.state.get("temp:run_id", "unknown")
         assessments: list[dict] = ctx.session.state.get("temp:assessments", [])
-        memory = memory_bank_tool.get_memory_bank()
+        # Per-region state captured ONCE per run: prior[:region] holds the
+        # PRE-RUN baseline (read lazily on first encounter, reused for every
+        # assessment of that region), persist[:region] is what gets written
+        # back (baseline + this run's appends). This guarantees read-before-
+        # write: a region is never compared against an entry written earlier
+        # in the same run.
+        prior: dict[str, list[dict[str, Any]]] = {}
+        persist: dict[str, list[dict[str, Any]]] = {}
 
         with observability.agent_span(AGENT_NAME, run_id=run_id) as handle:
             notes: list[dict[str, Any]] = []
             for assessment in assessments:
                 region_id = assessment["region_id"]
-                previous = memory.recall_latest(region_id)
-                runs_compared = memory.history_size(region_id) + 1
-                notes.append(build_trend_note(previous, assessment, runs_compared))
-                memory.store(region_id, assessment)
+                if region_id not in prior:
+                    doc = firestore_tool.read_assessment_history(region_id)
+                    prior[region_id] = _history_entries(doc)
+                    persist[region_id] = list(prior[region_id])
+
+                notes.append(compute_trend(assessment, prior[region_id]))
+
+                persist[region_id] = _append_to_history(
+                    persist[region_id], _recorded_entry(assessment)
+                )
+                firestore_tool.write_assessment_history(
+                    region_id, {"region_id": region_id, "entries": persist[region_id]}
+                )
+
             ctx.session.state["temp:trend_notes"] = notes
             handle.set_region_count(len(assessments))
             yield Event(

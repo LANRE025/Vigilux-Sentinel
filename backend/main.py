@@ -2,6 +2,7 @@
 
 Endpoints:
   GET  /health        - liveness + fleet wiring summary
+  GET  /fleet/regions - fast, read-only list of available regions (picker)
   POST /fleet/run     - executes the full four-agent monitoring pass and returns
                         the FleetReport
   GET  /fleet/status  - latest run, per-agent timings and registry entry
@@ -21,20 +22,22 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException
+from fastapi import Body
 from google.adk import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
+from pydantic import BaseModel, Field
 
-from .config import settings
-from .models.schemas import (
+from agents.config import settings
+from agents.models.schemas import (
     FLEET_AGENT_NAMES,
     FleetReport,
     FleetStatus,
     PerAgentTiming,
     RunLogEntry,
 )
-from .orchestrator import ORCHESTRATOR_NAME, build_orchestrator
-from .tools import firestore_tool, observability
+from agents.orchestrator import ORCHESTRATOR_NAME, build_orchestrator
+from agents.tools import firestore_tool, observability
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +50,15 @@ TRIGGER_MESSAGE = (
 
 _orchestrator = build_orchestrator()
 _session_service = InMemorySessionService()
+
+
+class FleetRunRequest(BaseModel):
+    """Optional request body for POST /fleet/run."""
+
+    region_ids: list[str] | None = Field(
+        default=None,
+        description="Optional list of region_ids to process. Omit for full fleet.",
+    )
 
 
 def _iso_now() -> str:
@@ -88,10 +100,34 @@ def health() -> dict:
     }
 
 
+@app.get("/fleet/regions")
+def fleet_regions() -> list[dict[str, str]]:
+    """List available regions for a picker: ``region_id`` + ``display_name``.
+
+    A fast, cheap, read-only view of what regions exist in the data source -
+    no staleness calculation, no Gemini call, and NO fleet run is started. It
+    reads the same ``region_snapshots`` collection the data steward reads, so
+    region identity is always in sync with where the assessment pipeline
+    actually pulls from.
+    """
+    return firestore_tool.list_regions()
+
+
 @app.post("/fleet/run", response_model=FleetReport)
-async def fleet_run() -> FleetReport:
-    """Run the full monitoring pass and return the FleetReport."""
+async def fleet_run(request: FleetRunRequest = Body(default=FleetRunRequest())) -> FleetReport:
+    """Run the full monitoring pass and return the FleetReport.
+
+    When ``region_ids`` is provided, only those regions are processed and any
+    requested IDs not found in the data source appear in ``missing_region_ids``.
+    """
     run_id = uuid.uuid4().hex
+    state_delta: dict[str, object] = {
+        "temp:run_id": run_id,
+        "temp:started_at": _iso_now(),
+    }
+    if request.region_ids:
+        state_delta["temp:region_ids"] = request.region_ids
+
     await _session_service.create_session(
         app_name=APP_NAME, user_id=USER_ID, session_id=run_id
     )
@@ -103,7 +139,7 @@ async def fleet_run() -> FleetReport:
         async for event in runner.run_async(
             user_id=USER_ID,
             session_id=run_id,
-            state_delta={"temp:run_id": run_id, "temp:started_at": _iso_now()},
+            state_delta=state_delta,
             new_message=types.Content(
                 role="user",
                 parts=[types.Part(text=TRIGGER_MESSAGE)],

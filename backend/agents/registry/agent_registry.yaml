@@ -4,7 +4,7 @@
 # these agents in strict sequence.
 agents:
   - name: data-steward
-    description: Reads every region snapshot from the region_snapshots Firestore collection and hands the fleet structured data.
+    description: Reads every region snapshot from the region_snapshots Firestore collection, recomputes staleness against the current date, and emits one canonical RegionSignal per (region, disease) document at or above the evaluation threshold (DATA_STEWARD_STALENESS_THRESHOLD_DAYS, inclusive).
     tools:
       - read_region_snapshots
     llm_calls: false
@@ -16,21 +16,21 @@ agents:
     llm_calls: true
     data_written: []
   - name: historian
-    description: Recalls each region's previous assessment from the Memory Bank, produces a TrendNote (first_observation/improving/worsening/unchanged), then stores this run's assessment back into the Memory Bank.
+    description: Reads each region's assessment history from the assessment_history Firestore collection, produces a TrendNote (first_observation/improving/worsening/unchanged, compared against the pre-run document), then appends this run's assessment (trimmed to the last 5 entries) back to the same document.
     tools:
-      - memory_bank.recall_latest
-      - memory_bank.store
-      - build_trend_note
+      - compute_trend
+      - firestore.read_assessment_history
+      - firestore.write_assessment_history
     llm_calls: false
     data_written:
-      - memory_bank (per-region assessment history)
+      - firestore.assessment_history (per-region last-5 assessment window)
   - name: curator
     description: Merges SignalAssessments with their TrendNotes into a FleetReport, persists it (fleet_runs), attaches per-agent telemetry (run_observability), and appends the registry log entry (run_log).
     tools:
       - build_fleet_report
       - firestore.write_fleet_report
       - firestore.write_run_observability
-      - firestore.append_run_log
+      - firestore.append_run_log_entry
     llm_calls: false
     data_written:
       - firestore.fleet_runs
@@ -39,7 +39,7 @@ agents:
 
 collections:
   region_snapshots: Source data read by data-steward.
-  assessment_history: Fallback Memory Bank (last N assessments per region).
+  assessment_history: Historian's per-region assessment window (last 5 entries per region).
   fleet_runs: Finalized FleetReports, one document per run.
   run_observability: Per-agent OTel timings, one document per run.
   run_log: Registry log, one document per completed run.
