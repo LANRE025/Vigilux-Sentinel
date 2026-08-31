@@ -27,8 +27,12 @@ export const agentsOrder = AGENTS_ORDER
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 async function req(path, options) {
+  // Only attach a JSON Content-Type when there's a body. A stray
+  // Content-Type on a GET (as before) made the dev proxy's http-proxy
+  // wait for a request body that never comes, hanging every read.
+  const withBody = Boolean(options?.body)
   const res = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    ...(withBody ? { headers: { 'Content-Type': 'application/json' } } : {}),
     ...options,
   })
   if (!res.ok) {

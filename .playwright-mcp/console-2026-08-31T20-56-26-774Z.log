@@ -1,1 +1,14 @@
 [     552ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5176/node_modules/.vite/deps/chunk-373CG7ZK.js?v=c2074082:21548
+[  190386ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5176/node_modules/.vite/deps/chunk-373CG7ZK.js?v=c2074082:21548
+[  991458ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5176/node_modules/.vite/deps/chunk-373CG7ZK.js?v=c2074082:21548
+[ 1203398ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788210989488:0
+[ 1203682ms] [ERROR] [hmr] Failed to reload /src/App.jsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5176/@vite/client:175
+[ 1214269ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211000214:0
+[ 1215146ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211001564:0
+[ 1222989ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211008904:0
+[ 1243175ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211029120:0
+[ 1251170ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211037265:0
+[ 1257197ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211043288:0
+[ 1272624ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211058854:0
+[ 1392939ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5176/src/App.jsx?t=1788211178543:0
+[ 1565578ms] The requested module '/src/data/mock.js' does not provide an export named 'agentsOrder'

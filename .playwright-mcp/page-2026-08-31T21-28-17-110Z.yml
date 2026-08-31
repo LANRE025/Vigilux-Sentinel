@@ -1,0 +1,210 @@
+- generic [ref=f23e3]:
+  - banner [ref=f23e4]:
+    - generic [ref=f23e5]:
+      - generic [ref=f23e6]: Vigilux Sentinel
+      - heading "Outbreak Situation Report" [level=1] [ref=f23e7]
+      - generic [ref=f23e8]: Demonstration data·5 regions selected·offline mode
+    - generic [ref=f23e9]:
+      - button "Run fleet assessment" [ref=f23e10] [cursor=pointer]
+      - status [ref=f23e11]:
+        - generic [ref=f23e12]: ready to demonstrate
+  - region "Summary" [ref=f23e13]:
+    - paragraph [ref=f23e14]:
+      - generic [ref=f23e15]: 2 regions
+      - text: need immediate attention, and another 2 are on watch.
+    - generic [ref=f23e16]:
+      - generic [ref=f23e17]:
+        - generic [ref=f23e18]: Regions assessed
+        - generic [ref=f23e19]: "5"
+        - generic [ref=f23e20]: in the latest run
+      - generic [ref=f23e21]:
+        - generic [ref=f23e22]: Urgent
+        - generic [ref=f23e23]: "2"
+        - generic [ref=f23e24]: need attention now
+      - generic [ref=f23e25]:
+        - generic [ref=f23e26]: On watch
+        - generic [ref=f23e27]: "2"
+        - generic [ref=f23e28]: elevated risk
+      - generic [ref=f23e29]:
+        - generic [ref=f23e30]: Flagged
+        - generic [ref=f23e31]: "3"
+        - generic [ref=f23e32]: across the fleet
+      - generic [ref=f23e33]:
+        - generic [ref=f23e34]: Last assessed
+        - generic [ref=f23e35]: August 31, 2026 · 1:00 AM
+        - generic [ref=f23e36]: demo record
+  - region "What needs attention" [ref=f23e37]:
+    - generic [ref=f23e38]:
+      - generic [ref=f23e39]: 02 · Attention
+      - generic [ref=f23e40]: What needs attention
+    - generic [ref=f23e42]:
+      - button "Urgent Zambia region-lusaka-01 ↑ worsening Admissions up 21% over the prior period, funding at 41% of the regional average and staffing below 30." [ref=f23e43] [cursor=pointer]:
+        - generic [ref=f23e44]:
+          - generic [ref=f23e45]: Urgent
+          - generic [ref=f23e46]: Zambia
+          - generic [ref=f23e47]: region-lusaka-01
+          - generic "Risk escalated from Watch to Urgent since the last assessment." [ref=f23e49]:
+            - generic [ref=f23e50]: ↑
+            - text: worsening
+        - paragraph [ref=f23e51]: Admissions up 21% over the prior period, funding at 41% of the regional average and staffing below 30.
+      - button "Urgent Ghana region-accra-01 ↑ worsening Rising admissions trend with funding at roughly half of the regional average." [ref=f23e52] [cursor=pointer]:
+        - generic [ref=f23e53]:
+          - generic [ref=f23e54]: Urgent
+          - generic [ref=f23e55]: Ghana
+          - generic [ref=f23e56]: region-accra-01
+          - generic "Risk escalated from Watch to Urgent since the last assessment." [ref=f23e58]:
+            - generic [ref=f23e59]: ↑
+            - text: worsening
+        - paragraph [ref=f23e60]: Rising admissions trend with funding at roughly half of the regional average.
+      - button "Watch Uganda region-kampala-01 ↑ worsening Admissions +8%; staffing close to the fleet floor." [ref=f23e61] [cursor=pointer]:
+        - generic [ref=f23e62]:
+          - generic [ref=f23e63]: Watch
+          - generic [ref=f23e64]: Uganda
+          - generic [ref=f23e65]: region-kampala-01
+          - generic "Risk escalated from Stable to Watch since the last assessment." [ref=f23e67]:
+            - generic [ref=f23e68]: ↑
+            - text: worsening
+        - paragraph [ref=f23e69]: Admissions +8%; staffing close to the fleet floor.
+      - button "Watch Kenya region-nairobi-01 ↓ improving Admissions +6% over the prior period with funding slightly below average." [ref=f23e70] [cursor=pointer]:
+        - generic [ref=f23e71]:
+          - generic [ref=f23e72]: Watch
+          - generic [ref=f23e73]: Kenya
+          - generic [ref=f23e74]: region-nairobi-01
+          - generic "Risk eased from Urgent to Watch since the last assessment." [ref=f23e76]:
+            - generic [ref=f23e77]: ↓
+            - text: improving
+        - paragraph [ref=f23e78]: Admissions +6% over the prior period with funding slightly below average.
+  - region "Region risk & change" [ref=f23e79]:
+    - generic [ref=f23e80]:
+      - generic [ref=f23e81]: 03 · Ledger
+      - generic [ref=f23e82]: Region risk & change
+    - generic [ref=f23e84]:
+      - generic [ref=f23e85]:
+        - generic [ref=f23e86]: Region
+        - generic [ref=f23e87]: Status
+        - generic [ref=f23e88]: Trend
+        - generic [ref=f23e89]: Days since survey
+        - generic [ref=f23e90]: Confidence
+      - button "Ghana region-accra-01 Urgent ↑ worsening 31 Medium +" [ref=f23e92] [cursor=pointer]:
+        - checkbox "Ghana region-accra-01" [checked] [ref=f23e93]:
+          - text: Ghana
+          - generic [ref=f23e95]: region-accra-01
+        - generic [ref=f23e96]: Urgent
+        - generic "Risk escalated from Watch to Urgent since the last assessment." [ref=f23e98]:
+          - generic [ref=f23e99]: ↑
+          - text: worsening
+        - generic [ref=f23e100]: "31"
+        - generic [ref=f23e101]: Medium
+        - generic [ref=f23e102]: +
+      - button "Zambia region-lusaka-01 Urgent ↑ worsening 47 High +" [ref=f23e104] [cursor=pointer]:
+        - checkbox "Zambia region-lusaka-01" [checked] [ref=f23e105]:
+          - text: Zambia
+          - generic [ref=f23e107]: region-lusaka-01
+        - generic [ref=f23e108]: Urgent
+        - generic "Risk escalated from Watch to Urgent since the last assessment." [ref=f23e110]:
+          - generic [ref=f23e111]: ↑
+          - text: worsening
+        - generic [ref=f23e112]: "47"
+        - generic [ref=f23e113]: High
+        - generic [ref=f23e114]: +
+      - button "Uganda region-kampala-01 Watch ↑ worsening 35 Medium +" [ref=f23e116] [cursor=pointer]:
+        - checkbox "Uganda region-kampala-01" [checked] [ref=f23e117]:
+          - text: Uganda
+          - generic [ref=f23e119]: region-kampala-01
+        - generic [ref=f23e120]: Watch
+        - generic "Risk escalated from Stable to Watch since the last assessment." [ref=f23e122]:
+          - generic [ref=f23e123]: ↑
+          - text: worsening
+        - generic [ref=f23e124]: "35"
+        - generic [ref=f23e125]: Medium
+        - generic [ref=f23e126]: +
+      - button "Kenya region-nairobi-01 Watch ↓ improving 15 Medium +" [ref=f23e128] [cursor=pointer]:
+        - checkbox "Kenya region-nairobi-01" [checked] [ref=f23e129]:
+          - text: Kenya
+          - generic [ref=f23e131]: region-nairobi-01
+        - generic [ref=f23e132]: Watch
+        - generic "Risk eased from Urgent to Watch since the last assessment." [ref=f23e134]:
+          - generic [ref=f23e135]: ↓
+          - text: improving
+        - generic [ref=f23e136]: "15"
+        - generic [ref=f23e137]: Medium
+        - generic [ref=f23e138]: +
+      - button "India region-bangalore-01 Stable · first assessment 6 High +" [ref=f23e140] [cursor=pointer]:
+        - checkbox "India region-bangalore-01" [ref=f23e141]:
+          - text: India
+          - generic [ref=f23e143]: region-bangalore-01
+        - generic [ref=f23e144]: Stable
+        - generic "First fleet assessment recorded for region-bangalore-01; baseline is Stable." [ref=f23e146]:
+          - generic [ref=f23e147]: ·
+          - text: first assessment
+        - generic [ref=f23e148]: "6"
+        - generic [ref=f23e149]: High
+        - generic [ref=f23e150]: +
+      - button "Brazil region-manaus-01 Unassessed — 9 — +" [ref=f23e152] [cursor=pointer]:
+        - checkbox "Brazil region-manaus-01" [ref=f23e153]:
+          - text: Brazil
+          - generic [ref=f23e155]: region-manaus-01
+        - generic [ref=f23e156]: Unassessed
+        - generic [ref=f23e157]: —
+        - generic [ref=f23e158]: "9"
+        - generic [ref=f23e159]: —
+        - generic [ref=f23e160]: +
+      - button "Indonesia region-jakarta-01 Unassessed — 20 — +" [ref=f23e162] [cursor=pointer]:
+        - checkbox "Indonesia region-jakarta-01" [ref=f23e163]:
+          - text: Indonesia
+          - generic [ref=f23e165]: region-jakarta-01
+        - generic [ref=f23e166]: Unassessed
+        - generic [ref=f23e167]: —
+        - generic [ref=f23e168]: "20"
+        - generic [ref=f23e169]: —
+        - generic [ref=f23e170]: +
+      - button "Mexico region-tijuana-01 Unassessed — 27 — +" [ref=f23e172] [cursor=pointer]:
+        - checkbox "Mexico region-tijuana-01" [ref=f23e173]:
+          - text: Mexico
+          - generic [ref=f23e175]: region-tijuana-01
+        - generic [ref=f23e176]: Unassessed
+        - generic [ref=f23e177]: —
+        - generic [ref=f23e178]: "27"
+        - generic [ref=f23e179]: —
+        - generic [ref=f23e180]: +
+      - button "Nepal region-kathmandu-01 Unassessed — 88 — +" [ref=f23e182] [cursor=pointer]:
+        - checkbox "Nepal region-kathmandu-01" [checked] [ref=f23e183]:
+          - text: Nepal
+          - generic [ref=f23e185]: region-kathmandu-01
+        - generic [ref=f23e186]: Unassessed
+        - generic [ref=f23e187]: —
+        - generic [ref=f23e188]: "88"
+        - generic [ref=f23e189]: —
+        - generic [ref=f23e190]: +
+      - button "Peru region-lima-01 Unassessed — 12 — +" [ref=f23e192] [cursor=pointer]:
+        - checkbox "Peru region-lima-01" [ref=f23e193]:
+          - text: Peru
+          - generic [ref=f23e195]: region-lima-01
+        - generic [ref=f23e196]: Unassessed
+        - generic [ref=f23e197]: —
+        - generic [ref=f23e198]: "12"
+        - generic [ref=f23e199]: —
+        - generic [ref=f23e200]: +
+  - region "What the fleet did" [ref=f23e201]:
+    - generic [ref=f23e202]:
+      - generic [ref=f23e203]: 04 · Fleet
+      - generic [ref=f23e204]: What the fleet did
+    - generic [ref=f23e206]:
+      - generic [ref=f23e207]:
+        - generic [ref=f23e208]: Data steward — pulled region telemetry
+        - generic [ref=f23e210]: 240 ms · 10 regions
+        - generic [ref=f23e211]: Ingests the latest surveillance figures for each selected region.
+      - generic [ref=f23e212]:
+        - generic [ref=f23e213]: Risk assessor — scored each region
+        - generic [ref=f23e215]: 1.2 s · 5 regions
+        - generic [ref=f23e216]: Applies the risk model and assigns Urgent / Watch / Stable.
+      - generic [ref=f23e217]:
+        - generic [ref=f23e218]: Historian — compared against prior runs
+        - generic [ref=f23e220]: 320 ms · 5 regions
+        - generic [ref=f23e221]: Checks each result against the region’s assessment history.
+      - generic [ref=f23e222]:
+        - generic [ref=f23e223]: Curator — wrote the assessment report
+        - generic [ref=f23e225]: 260 ms · 5 regions
+        - generic [ref=f23e226]: Assembles the findings into a coherent situation report.
+    - generic [ref=f23e227]: "Run id: demo-9f3c1e2a7b4d"
+  - contentinfo [ref=f23e228]: Vigilux Sentinel · outbreak-intelligence fleet · demo data

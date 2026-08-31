@@ -1,66 +1,66 @@
 /* ============================================================
-   Vigilux Sentinel — Signal Console · design tokens
-   A dark early-warning command instrument. Risk is a SYSTEM of
-   signal lamps, not a single accent color. Telemetry in mono.
+   Vigilux Sentinel — Situation Report · design tokens
+   An editorial public-health report: calm, authoritative,
+   readable. Severity is a restrained editorial marker, not a
+   glowing lamp. Strong type carries the hierarchy.
    ============================================================ */
 
 :root {
-  /* -- surface -------------------------------------------------- */
-  --bg: #0a0e1a; /* ink blue-black base (ops room) */
-  --bg-raised: #0d1322; /* subtle lift above the base */
-  --panel: #111726; /* card / board panel */
-  --panel-2: #161f33; /* nested / hovered panel */
-  --grid: #1f2a3f; /* hairlines, dividers, gridlines */
-  --grid-strong: #2a3854; /* emphasized rules */
+  /* -- surface (warm paper) -------------------------------------- */
+  --paper: #faf7f1; /* page background */
+  --paper-raised: #ffffff; /* cards / raised surfaces */
+  --paper-tint: #f1ece1; /* subtle section tint */
 
-  /* -- ink (text) ------------------------------------------------ */
-  --ink: #e7e9ef; /* primary data text (warm off-white) */
-  --ink-soft: #b9c0d1; /* secondary */
-  --muted: #7a849b; /* labels, captions, idle state */
-  --faint: #4a5470; /* decorative / placeholders */
+  /* -- ink ---------------------------------------------------------- */
+  --ink: #1f2328; /* primary text (near-black slate) */
+  --ink-soft: #3a4149; /* secondary text */
+  --muted: #717b84; /* labels, captions */
+  --faint: #9aa1a6; /* decorative */
 
-  /* -- risk lamps -------------------------------------------------- */
-  --stable: #35d07f; /* signal green  */
-  --watch: #f5a623; /* amber          */
-  --urgent: #ff4d4d; /* signal red     */
+  /* -- lines ---------------------------------------------------------- */
+  --line: #e4dfd4; /* hairlines */
+  --line-strong: #c9c2b2; /* emphasized rules */
 
-  /* -- sweep / interactive accent (used sparingly) ---------------- */
-  --phosphor: #4fd8ff; /* radar phosphor for the live sweep + focus */
-  --phosphor-dim: rgba(79, 216, 255, 0.14);
+  /* -- severity (restrained editorial markers) ------------------------ */
+  --urgent: #b42318; /* strong report red */
+  --urgent-soft: rgba(180, 35, 24, 0.08);
+  --watch: #b7791f; /* amber / bronze */
+  --watch-soft: rgba(183, 121, 31, 0.1);
+  --stable: #2f6f4f; /* deep green */
+  --stable-soft: rgba(47, 111, 79, 0.08);
 
-  /* lamp glow shadows */
-  --glow-stable: 0 0 6px rgba(53, 208, 127, 0.55), 0 0 18px rgba(53, 208, 127, 0.25);
-  --glow-watch: 0 0 6px rgba(245, 166, 35, 0.55), 0 0 18px rgba(245, 166, 35, 0.25);
-  --glow-urgent: 0 0 6px rgba(255, 77, 77, 0.6), 0 0 20px rgba(255, 77, 77, 0.32);
-  --glow-phosphor: 0 0 6px rgba(79, 216, 255, 0.6), 0 0 20px rgba(79, 216, 255, 0.3);
+  /* -- brand accent (authoritative slate blue) ------------------------ */
+  --accent: #24425f;
+  --accent-ink: #1d3a52;
+  --accent-soft: rgba(36, 66, 95, 0.08);
 
-  /* -- type --------------------------------------------------------- */
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  /* -- type ------------------------------------------------------------ */
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  /* -- spacing / geometry ------------------------------------------ */
+  /* -- geometry ---------------------------------------------------------- */
+  --radius: 2px; /* crisp editorial corners */
+  --measure: 1040px; /* report column width */
+
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
+  --space-6: 40px;
+  --space-7: 64px;
 
-  --radius: 3px; /* crisp instrument corners, not pill-shaped */
-
-  /* -- motion --------------------------------------------------------- */
+  /* -- motion ------------------------------------------------------------- */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 120ms;
-  --dur-med: 260ms;
-  --dur-sweep: 320ms;
-
-  --topbar-h: 52px;
-  --statusrail-h: 56px;
+  --dur-med: 240ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-sweep: 0ms;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
   }
 }
