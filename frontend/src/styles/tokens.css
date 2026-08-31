@@ -1,47 +1,49 @@
 /* ============================================================
-   Vigilux Sentinel — Situation Report · design tokens
-   An editorial public-health report: calm, authoritative,
-   readable. Severity is a restrained editorial marker, not a
-   glowing lamp. Strong type carries the hierarchy.
+   Vigilux Sentinel — Dark Dashboard · design tokens
+   A dark, tech-forward data dashboard: deep navy backgrounds,
+   cyan/teal accents, glowing borders, glass-morphism panels.
    ============================================================ */
 
 :root {
-  /* -- surface (warm paper) -------------------------------------- */
-  --paper: #faf7f1; /* page background */
-  --paper-raised: #ffffff; /* cards / raised surfaces */
-  --paper-tint: #f1ece1; /* subtle section tint */
+  /* -- surface (dark navy) ----------------------------------------- */
+  --paper: #0a0f1a;
+  --paper-raised: #111827;
+  --paper-tint: #1a2332;
+  --paper-glass: rgba(17, 24, 39, 0.7);
 
-  /* -- ink ---------------------------------------------------------- */
-  --ink: #1f2328; /* primary text (near-black slate) */
-  --ink-soft: #3a4149; /* secondary text */
-  --muted: #717b84; /* labels, captions */
-  --faint: #9aa1a6; /* decorative */
+  /* -- ink (light text) --------------------------------------------- */
+  --ink: #f0f4f8;
+  --ink-soft: #94a3b8;
+  --muted: #64748b;
+  --faint: #475569;
 
-  /* -- lines ---------------------------------------------------------- */
-  --line: #e4dfd4; /* hairlines */
-  --line-strong: #c9c2b2; /* emphasized rules */
+  /* -- lines (subtle glow) ------------------------------------------ */
+  --line: #1e293b;
+  --line-strong: #334155;
+  --line-glow: rgba(56, 189, 248, 0.15);
 
-  /* -- severity (restrained editorial markers) ------------------------ */
-  --urgent: #b42318; /* strong report red */
-  --urgent-soft: rgba(180, 35, 24, 0.08);
-  --watch: #b7791f; /* amber / bronze */
-  --watch-soft: rgba(183, 121, 31, 0.1);
-  --stable: #2f6f4f; /* deep green */
-  --stable-soft: rgba(47, 111, 79, 0.08);
+  /* -- severity (bright, glowing markers) --------------------------- */
+  --urgent: #f87171;
+  --urgent-soft: rgba(248, 113, 113, 0.12);
+  --watch: #fbbf24;
+  --watch-soft: rgba(251, 191, 36, 0.12);
+  --stable: #34d399;
+  --stable-soft: rgba(52, 211, 153, 0.12);
 
-  /* -- brand accent (authoritative slate blue) ------------------------ */
-  --accent: #24425f;
-  --accent-ink: #1d3a52;
-  --accent-soft: rgba(36, 66, 95, 0.08);
+  /* -- brand accent (cyan / teal) ----------------------------------- */
+  --accent: #38bdf8;
+  --accent-ink: #0ea5e9;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --accent-glow: rgba(56, 189, 248, 0.25);
 
   /* -- type ------------------------------------------------------------ */
-  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-ui: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-ui: 'Inter', 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* -- geometry ---------------------------------------------------------- */
-  --radius: 2px; /* crisp editorial corners */
-  --measure: 1040px; /* report column width */
+  --radius: 6px;
+  --measure: 1200px;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -55,6 +57,10 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 120ms;
   --dur-med: 240ms;
+
+  /* -- shadows / glow ---------------------------------------------------- */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line);
+  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,5 @@
 /* ============================================================
-   Vigilux Sentinel — Situation Report · global styles
+   Vigilux Sentinel — Dark Dashboard · global styles
    ============================================================ */
 
 *,
@@ -17,6 +17,22 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* subtle dot-grid background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.06) 1px, transparent 0),
+    radial-gradient(ellipse at 20% 50%, rgba(56, 189, 248, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(14, 165, 233, 0.03) 0%, transparent 50%);
+  background-size: 32px 32px, 100% 100%, 100% 100%;
+  pointer-events: none;
 }
 
 ::selection {
@@ -51,7 +67,7 @@ p {
    ------------------------------------------------------------ */
 .masthead {
   padding: var(--space-6) 0 var(--space-5);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 1px solid var(--line-strong);
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -74,11 +90,19 @@ p {
 
 .masthead h1 {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-top: var(--space-2);
+}
+
+.masthead h1 .brand-vigilux {
+  color: var(--ink);
+}
+
+.masthead h1 .brand-sentinel {
+  color: var(--accent);
 }
 
 .masthead .pubdate {
@@ -111,33 +135,38 @@ p {
   font-size: 13px;
   color: var(--ink);
   background: transparent;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   padding: 9px 20px;
   cursor: pointer;
   transition: background var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease);
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
 
 .btn:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper-tint);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .btn-primary {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--accent);
+  color: #0a0f1a;
+  border-color: var(--accent);
+  font-weight: 700;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #7dd3fc;
+  border-color: #7dd3fc;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
 }
 
 .btn-ghost {
@@ -146,8 +175,8 @@ p {
 }
 
 .btn-ghost:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* run status line */
@@ -174,8 +203,9 @@ p {
 
 .runstate .ag.on {
   border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-soft);
+  color: #0a0f1a;
+  background: var(--accent);
+  font-weight: 600;
 }
 
 .runstate .live-dot {
@@ -183,6 +213,7 @@ p {
   height: 8px;
   border-radius: 50%;
   background: var(--stable);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.5);
 }
 
 /* ------------------------------------------------------------
@@ -205,8 +236,7 @@ p {
 
 .lede .lead .hl {
   font-weight: 700;
-  font-style: italic;
-  color: var(--urgent);
+  color: var(--accent);
 }
 
 .lede .facts {
@@ -214,6 +244,14 @@ p {
   flex-wrap: wrap;
   gap: var(--space-6);
   margin-top: var(--space-5);
+}
+
+.fact {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4) var(--space-5);
+  min-width: 120px;
 }
 
 .fact .k {
@@ -226,8 +264,8 @@ p {
 
 .fact .v {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 26px;
+  font-weight: 700;
+  font-size: 28px;
   line-height: 1.1;
   margin-top: var(--space-1);
 }
@@ -263,7 +301,7 @@ p {
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -291,18 +329,20 @@ p {
 }
 
 .callout {
+  background: var(--paper-raised);
   border: 1px solid var(--line);
   border-left-width: 4px;
   border-radius: var(--radius);
   padding: var(--space-4) var(--space-5);
-  background: var(--paper-raised);
   cursor: pointer;
   transition: border-color var(--dur-fast) var(--ease),
-    background var(--dur-fast) var(--ease);
+    background var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
 }
 
 .callout:hover {
   border-color: var(--line-strong);
+  box-shadow: var(--shadow-glow);
 }
 
 .callout[data-risk='Urgent'] { border-left-color: var(--urgent); }
@@ -370,7 +410,7 @@ p {
    Region ledger (full picture + change over time)
    ------------------------------------------------------------ */
 .ledger {
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--accent);
 }
 
 .ledger-row {
@@ -426,11 +466,12 @@ p {
 .ledger-expanded {
   grid-column: 1 / -1;
   padding: var(--space-4) var(--space-3) var(--space-5);
-  background: var(--paper-raised);
+  background: var(--paper-tint);
   border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .ledger-expanded .exp-note {
@@ -460,7 +501,7 @@ p {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   padding: 1px 8px;
-  background: var(--paper);
+  background: var(--paper-tint);
 }
 
 /* ------------------------------------------------------------
@@ -488,11 +529,13 @@ p {
   background: var(--paper-tint);
   border-radius: var(--radius);
   overflow: hidden;
+  border: 1px solid var(--line);
 }
 
 .agent .a-bar .fill {
   height: 100%;
   background: var(--accent);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
 }
 
 .agent .a-meta {

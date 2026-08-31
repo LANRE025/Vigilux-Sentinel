@@ -13,8 +13,11 @@ export default function Masthead({
   return (
     <header className="masthead">
       <div className="brand">
-        <div className="kicker">Vigilux Sentinel</div>
-        <h1>Outbreak Situation Report</h1>
+        <div className="kicker">Outbreak Intelligence Fleet</div>
+        <h1>
+          <span className="brand-vigilux">Vigilux</span>{' '}
+          <span className="brand-sentinel">Sentinel</span>
+        </h1>
         <div className="pubdate">
           {live ? 'Live fleet assessment' : 'Demonstration data'}
           <span className="sep">·</span>
