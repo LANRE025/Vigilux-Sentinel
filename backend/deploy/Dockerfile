@@ -7,8 +7,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Install deps first for better layer caching.
-COPY backend/agents/requirements.txt ./requirements.txt
+# Install deps first for better layer caching (runtime deps only - not the
+# dev/test requirements, which the minimal runtime image does not need).
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Application code (agents package + top-level app module). Data seed script is optional at runtime.

@@ -1,0 +1,76 @@
+# ============================================================================
+# Vigilux Sentinel - Python dependencies
+# ============================================================================
+#
+# One source of truth for the whole project. Install from the backend/
+# directory so the `agents` package, `main:app`, seed script and tests all
+# resolve:
+#
+#     ..\.venv\Scripts\python.exe -m pip install -r requirements.txt
+#     ..\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt   (tests)
+#
+# Two sections below:
+#   * Core / runtime   - everything needed to BOOT the FastAPI fleet
+#                        (`uvicorn main:app`) and run the agents/live checks.
+#   * Dev / test       - pytest + async plugin + the HTTP test client backend
+#                        (httpx). Keep these in requirements-dev.txt so the
+#                        minimal runtime image stays lean; both are required
+#                        to run `pytest`.
+#
+# Pin strategy: runtime pins use `>=` minimums (matching the repo's original
+# style) so patch upgrades are allowed, while versions known-good in this
+# tree are noted in comments. Exact-pin if you want reproducible builds.
+# ============================================================================
+
+# --- ADK / Agent Fleet ------------------------------------------------------
+# The google-agent-development-kit that powers the SequentialAgent
+# orchestrator and the four fleet agents (data-steward, risk-assessor,
+# historian, curator).
+google-adk==1.39.1
+
+# --- Gemini / Vertex AI ----------------------------------------------------
+# Python SDK for Gemini (google-genai). Reached via Vertex AI using
+# Application Default Credentials - no API key is read by the fleet.
+# Vertex endpoint location is configured in .env (GEMINI_VERTEX_LOCATION).
+google-genai>=0.2
+# Google Cloud AI Platform / Vertex AI SDK. Not imported directly by the
+# application, but pulled in by google-genai's `vertexai=True` path and the
+# live gemini/vertex smoke test (tests/test_gemini_vertex_smoke.py).
+google-cloud-aiplatform>=1.75
+
+# --- Firestore (source data + persistence) ---------------------------------
+# The region_snapshots collection the data steward reads, plus the
+# fleet_runs / run_observability / run_log / assessment_history collections
+# the curator and historian write.
+google-cloud-firestore>=2.16
+
+# --- Auth (transitive, required by the GCP clients above) ------------------
+# Application Default Credentials discovery used by Firebase/Firestore and
+# Vertex. `gcloud auth application-default login` populates the ADC file this
+# relies on.
+google-auth>=2.27
+
+# --- Web framework ---------------------------------------------------------
+# FastAPI service exposing /health, /fleet/regions, /fleet/run, /fleet/status.
+fastapi>=0.111
+# ASGI server used to serve the app (`uvicorn main:app`).
+uvicorn>=0.30
+
+# --- Runtime config & data models ------------------------------------------
+# Pydantic v2 models (schemas.py) and pydantic-settings (config.py, reads .env).
+pydantic>=2.7
+pydantic-settings>=2.3
+
+# --- HTTP client -----------------------------------------------------------
+# Used directly by the risk assessor's Gemini transient-error classification
+# (httpx.TimeoutException / httpx.ConnectError) and as the ASGI test client
+# backend for the FastAPI endpoint tests.
+httpx>=0.27
+
+# --- Observability (optional at runtime) -----------------------------------
+# OpenTelemetry tracing. The exporter is only wired when
+# OTEL_CLOUD_TRACE_ENABLED=true and the exporter package is installed;
+# otherwise tracing falls back to in-memory (no crash).
+opentelemetry-api>=1.27
+opentelemetry-sdk>=1.27
+opentelemetry-exporter-gcp-trace>=1.6

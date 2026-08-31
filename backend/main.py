@@ -3,8 +3,8 @@
 Endpoints:
   GET  /health        - liveness + fleet wiring summary
   GET  /fleet/regions - fast, read-only list of available regions (picker)
-  POST /fleet/run     - executes the full four-agent monitoring pass and returns
-                        the FleetReport
+  POST /fleet/run     - executes the four-agent monitoring pass over exactly the
+                        requested region_ids and returns the FleetReport
   GET  /fleet/status  - latest run, per-agent timings and registry entry
 
 Each POST /fleet/run creates a fresh session keyed by a new run id and seeds
@@ -22,7 +22,6 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException
-from fastapi import Body
 from google.adk import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
@@ -44,8 +43,8 @@ logger = logging.getLogger(__name__)
 APP_NAME = settings.APP_NAME
 USER_ID = settings.FLEET_USER_ID
 TRIGGER_MESSAGE = (
-    "Run the full Vigilux Sentinel fleet monitoring pass for all regions "
-    "and return the FleetReport."
+    "Run the Vigilux Sentinel fleet monitoring pass for the requested regions "
+    "(see temp:region_ids) and return the FleetReport."
 )
 
 _orchestrator = build_orchestrator()
@@ -53,11 +52,21 @@ _session_service = InMemorySessionService()
 
 
 class FleetRunRequest(BaseModel):
-    """Optional request body for POST /fleet/run."""
+    """Required request body for POST /fleet/run.
 
-    region_ids: list[str] | None = Field(
-        default=None,
-        description="Optional list of region_ids to process. Omit for full fleet.",
+    ``region_ids`` is mandatory: callers always say exactly which regions to
+    look through this run. There is no implicit "full fleet" default, so each
+    run is bounded to the requested subset (a full-fleet run over every region
+    snapshots is far too slow to be useful from the API).
+    """
+
+    region_ids: list[str] = Field(
+        description=(
+            "Regions to look through this run (region_ids). Required - pass the "
+            "subset you want assessed. IDs not found in the data source are "
+            "reported back in the FleetReport.missing_region_ids rather than "
+            "failing the run."
+        ),
     )
 
 
@@ -114,19 +123,18 @@ def fleet_regions() -> list[dict[str, str]]:
 
 
 @app.post("/fleet/run", response_model=FleetReport)
-async def fleet_run(request: FleetRunRequest = Body(default=FleetRunRequest())) -> FleetReport:
-    """Run the full monitoring pass and return the FleetReport.
+async def fleet_run(request: FleetRunRequest) -> FleetReport:
+    """Run the monitoring pass over exactly the requested ``region_ids``.
 
-    When ``region_ids`` is provided, only those regions are processed and any
+    ``region_ids`` is required (every run is scoped to an explicit subset); any
     requested IDs not found in the data source appear in ``missing_region_ids``.
     """
     run_id = uuid.uuid4().hex
     state_delta: dict[str, object] = {
         "temp:run_id": run_id,
         "temp:started_at": _iso_now(),
+        "temp:region_ids": request.region_ids,
     }
-    if request.region_ids:
-        state_delta["temp:region_ids"] = request.region_ids
 
     await _session_service.create_session(
         app_name=APP_NAME, user_id=USER_ID, session_id=run_id

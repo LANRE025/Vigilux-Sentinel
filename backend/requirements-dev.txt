@@ -1,0 +1,20 @@
+# ============================================================================
+# Vigilux Sentinel - Development / test dependencies
+# ============================================================================
+#
+# Install alongside requirements.txt to run the test suite:
+#
+#     ..\.venv\Scripts\python.exe -m pip install -r requirements.txt
+#     ..\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+#
+# See the README for the full workflow. Tests run from backend/:
+#
+#     ..\.venv\Scripts\python.exe -m pytest -q
+# ============================================================================
+
+# --- Test runner ------------------------------------------------------------
+# pytest is configured in backend/pytest.ini (asyncio_mode=auto, testpaths=tests).
+pytest>=8.0
+# Async support: pytest.ini sets `asyncio_mode = auto` so the async agent tests
+# need pytest-asyncio installed.
+pytest-asyncio>=0.23
